@@ -1,0 +1,7 @@
+{
+  "remote_ip":"118.25.218.132:1024",
+  "server_ip":"127.0.0.1:3306 ",
+  "remote_port":33060,
+  "crypt": "aes-128-cbc",
+  "crypt_key": "gonat"
+}
