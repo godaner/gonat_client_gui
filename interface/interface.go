@@ -3,6 +3,7 @@ package _interface
 type Conversation interface {
 	Monitor()
 	Close()
+	Heartbeat()
 	Send([]byte) error
 }
 

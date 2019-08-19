@@ -34,7 +34,13 @@ label:
 	if err != nil {
 		slog.Logger.Error(err)
 		time.Sleep(5 * time.Second)
-		goto label
+
+		select {
+		case <-stop_signal.Done():
+			remote_conn.Close()
+		default:
+			goto label
+		}
 	}
 	content.(*widget.Box).Children[0] = widget.NewLabelWithStyle("connection succeeded", fyne.TextAlignCenter, fyne.TextStyle{Bold: true})
 
@@ -49,7 +55,6 @@ label:
 		}
 	}()
 	start_conversation(remote_conn)
-
 	cancel()
 
 }
@@ -74,7 +79,7 @@ func start_conversation(remote_conn net.Conn) {
 		slog.Logger.Error(err)
 		return
 	}
-
+	go rc.Heartbeat()
 	rc.Monitor()
 
 }
