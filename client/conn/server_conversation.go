@@ -41,9 +41,7 @@ func (sc *server_conversation) Monitor() {
 				_, err := sc.remote_conn.Write(p.Marshal(sc.crypto_handler))
 				if err != nil {
 					slog.Logger.Error(err)
-					sc.remote_conn.Close()
 				}
-
 				sc.Close()
 				return
 			}
